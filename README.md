@@ -13,9 +13,8 @@ This project is <strong>Learning Log</strong> web-app
 ## Tech/framework used
 
 **Built with**
+
 [Django](https://www.djangoproject.com/)
 
 ## Process 
-<ol>
-  Database
- </ol>
+1. [Database]()
