@@ -19,3 +19,5 @@ This project is <strong>Learning Log</strong> web-app
 
 ## Process 
 1. [Database](https://github.com/Choco0914/learning_log/tree/database)
+
+2. [App](https://github.com/Choco0914/learning_log/tree/app)
