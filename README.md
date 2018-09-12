@@ -14,7 +14,8 @@ This project is <strong>Learning Log</strong> web-app
 
 **Built with**
 
-[Django](https://www.djangoproject.com/)
+* [Django](https://www.djangoproject.com/)
+* [Python](https://www.python.org/)
 
 ## Process 
 1. [Database](https://github.com/Choco0914/learning_log/tree/database)
