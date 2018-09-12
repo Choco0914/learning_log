@@ -17,4 +17,4 @@ This project is <strong>Learning Log</strong> web-app
 [Django](https://www.djangoproject.com/)
 
 ## Process 
-1. [Database]()
+1. [Database](https://github.com/Choco0914/learning_log/tree/database)
