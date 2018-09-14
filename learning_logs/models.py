@@ -8,3 +8,19 @@ class Topic(models.Model):
     def __str__(self):
         """모델에 관한 정보를 문자열 형태로 변환한다."""
         return self.text
+
+class Entry(models.Model):
+    """주제에 관해 공부한 내용"""
+    topic = models.ForeignKey(Topic, on_delete = models.CASCADE)
+    text = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'entries'
+
+    def __str__(self):
+        """모델에 관한 정보를 문자열 형태로 반환한다."""
+        if self.text[:] > self.text[:50]:
+            return self.text[:50] + "..."
+        else:
+            return self.text[:]
