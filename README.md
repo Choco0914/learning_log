@@ -24,4 +24,4 @@ This project is <strong>Learning Log</strong> web-app
 
 3. [Model](https://github.com/Choco0914/learning_log/tree/model)
 
-4. [Admin]()
+4. [Admin](https://github.com/Choco0914/learning_log/tree/admin)
