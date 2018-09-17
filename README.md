@@ -26,4 +26,4 @@ This project is <strong>Learning Log</strong> web-app
 
 4. [Admin](https://github.com/Choco0914/learning_log/tree/admin)
 
-5. [URL}(https://github.com/Choco0914/learning_log/tree/Url_Page)
+5. [URL](https://github.com/Choco0914/learning_log/tree/Url_Page)
