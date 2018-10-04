@@ -6,22 +6,36 @@
 
   <p>Entries:</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <p>
       <a href="{% url 'learning_logs:new_entry' topic.id %}">add new entry</a>
     </p>
 >>>>>>> 13173ebdbc6c552af733a2c88de4d9ef84f8d32c
+=======
+  <p>Entries:</p>
+    <p>
+      <a href="{% url 'learning_logs:new_entry' topic.id %}">add new entry</a>
+    </p>
+>>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
   <ul>
     {% for entry in entries %}
     <li>
       <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
       <p>{{ entry.text|linebreaks }}</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <p>
         <a href="{% url 'learning_logs:edit_entry' entry.id %}">edit entry</a>
       </p>
 >>>>>>> 13173ebdbc6c552af733a2c88de4d9ef84f8d32c
+=======
+      <p>{{ entry.text|linebreaks }}</p>
+      <p>
+        <a href="{% url 'learning_logs:edit_entry' entry.id %}">edit entry</a>
+      </p>
+>>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
     </li>
     {% empty %}
       <li>

@@ -1,14 +1,21 @@
 {% extends "learning_logs/base.html" %}
 
 {% block content %}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
   <p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
 
   <p>Add a new entry:</p>
   <form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
+<<<<<<< HEAD
       <button name='submit'>add entry</button>
+=======
+    <button name="submit">add entry</button>
+>>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
   </form>
 
 {% endblock %}

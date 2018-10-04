@@ -1,10 +1,22 @@
 <p>
 <<<<<<< HEAD
   <a href="{% url 'learning_logs:index' %}">Learning Log</a>
+<<<<<<< HEAD
 =======
   <a href="{% url 'learning_logs:index' %}">Learning Log</a> -
 >>>>>>> 13173ebdbc6c552af733a2c88de4d9ef84f8d32c
+=======
+
+<p>
+>>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
   <a href="{% url 'learning_logs:topics' %}">Topics</a>
+  {% if user.is_authenticated %}
+    Hello, {{ user.username }}.
+    <a href="{% url 'users:logout' %}">Log Out</a>
+  {% else %}
+    <a href="{% url 'users:register' %}">register</a>
+    <a href="{% url 'users:login' %}">Log in</a>
+  {% endif %}
 </p>
 
 {% block content %}{% endblock %}

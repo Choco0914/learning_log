@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+<<<<<<< HEAD
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
+=======
+>>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
 
 from .models import Topic
+from .forms import TopicForm, EntryForm
 
 def index(request):
     """학습 로그 홈페이지"""
@@ -24,7 +28,10 @@ def topic(request, topic_id):
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learning_logs/topic.html', context)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
 
 def new_topic(request):
     """새 주제 추가"""
@@ -77,4 +84,7 @@ def edit_entry(request, entry_id):
 
     context = {'entry': entry, 'topic':topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
+<<<<<<< HEAD
 >>>>>>> 13173ebdbc6c552af733a2c88de4d9ef84f8d32c
+=======
+>>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
