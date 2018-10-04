@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # 내가 만든 앱
     'learning_logs',
+    'users'
 ]
 
 MIDDLEWARE = [
