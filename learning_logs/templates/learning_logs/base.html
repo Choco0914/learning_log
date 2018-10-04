@@ -1,10 +1,7 @@
-<<<<<<< Updated upstream
 <p>
   <a href="{% url 'learning_logs:index' %}">Learning Log</a>
-=======
+
 <p>
-  <a href="{% url 'learning_logs:index' %}">Learning Log</a>
->>>>>>> Stashed changes
   <a href="{% url 'learning_logs:topics' %}">Topics</a>
   {% if user.is_authenticated %}
     Hello, {{ user.username }}.

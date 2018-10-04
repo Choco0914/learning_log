@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Topic
+from .forms import TopicForm, EntryForm
 
 def index(request):
     """학습 로그 홈페이지"""
@@ -18,8 +21,6 @@ def topic(request, topic_id):
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learning_logs/topic.html', context)
-<<<<<<< Updated upstream
-=======
 
 def new_topic(request):
     """새 주제 추가"""
@@ -72,4 +73,3 @@ def edit_entry(request, entry_id):
 
     context = {'entry': entry, 'topic':topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
->>>>>>> Stashed changes
