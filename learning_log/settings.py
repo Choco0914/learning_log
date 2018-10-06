@@ -40,7 +40,10 @@ INSTALLED_APPS = [
 
     # 내가 만든 앱
     'learning_logs',
-    'users'
+    'users',
+
+    # Apps created by others
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +128,8 @@ STATIC_URL = '/static/'
 
 # my setting
 LOGIN_URL = '/users/login/'
+
+# django=bootstrap3 setting
+BOOTSTRAP3 = {
+    'include_jquery' : True,
+}
