@@ -1,29 +1,38 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 =======
 >>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
+=======
+from django.contrib.auth.decorators import login_required
+>>>>>>> c2ea98ca74aae0fd1aaffa7293a64ceaf8950239
 
-from .models import Topic
+from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
 def index(request):
     """학습 로그 홈페이지"""
     return render(request, 'learning_logs/index.html')
 
+@login_required
 def topics(request):
     """주제를 표시한다."""
-    topics = Topic.objects.order_by('date_added')
+    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
+@login_required
 def topic(request, topic_id):
     """주제 하나와 연결된 모든 항목을 표시한다."""
     topic = Topic.objects.get(id=topic_id)
+    # 주제가 현재 사용자의 것인지 확인한다.
+    check_user = check_topic_owner(request, topic)
+
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learning_logs/topic.html', context)
@@ -33,6 +42,7 @@ def topic(request, topic_id):
 =======
 >>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
 
+@login_required
 def new_topic(request):
     """새 주제 추가"""
     if request.method != 'POST':
@@ -42,15 +52,19 @@ def new_topic(request):
         # POST 데이터를 받아서 처리한다.
         form = TopicForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_topic = form.save(commit=False)
+            new_topic.owner = request.user
+            new_topic.save()
             return HttpResponseRedirect(reverse('learning_logs:topics'))
 
     context = {'form': form}
     return render(request, 'learning_logs/new_topic.html', context)
 
+@login_required
 def new_entry(request, topic_id):
     """특정 주제에 관한 새 항목을 추가"""
     topic = Topic.objects.get(id=topic_id)
+    check_user = check_topic_owner(request, topic)
 
     if request.method != 'POST':
         # 전송된 데이터가 없으므로 빈 폼을 만든다.
@@ -68,10 +82,12 @@ def new_entry(request, topic_id):
     context = {'topic':topic, 'form':form}
     return render(request, 'learning_logs/new_entry.html', context)
 
+@login_required
 def edit_entry(request, entry_id):
     """기존 항목을 편집한다."""
     entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
+    check_user = check_topic_owner(request, topic)
 
     if request.method != 'POST':
         # 첫 요청이므로 폼을 현재 텍스트로 채운다.
@@ -85,6 +101,14 @@ def edit_entry(request, entry_id):
     context = {'entry': entry, 'topic':topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 13173ebdbc6c552af733a2c88de4d9ef84f8d32c
 =======
 >>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
+=======
+
+def check_topic_owner(request, topic):
+    """현재 유저가 올바른 유저인지 체크한다"""
+    if topic.owner != request.user:
+        raise Http404
+>>>>>>> c2ea98ca74aae0fd1aaffa7293a64ceaf8950239
