@@ -1,4 +1,17 @@
 {% extends "learning_logs/base.html" %}
+<<<<<<< HEAD
+
+{% block content %}
+
+  <p><a href="{% url 'learning_logs:topic' topic.id}">{{ topic }}</a></p>
+
+  <p>Edit entry:</p>
+
+  <form action="{% url 'learning_logs:edit_entry' topic.id}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+      <button name = "submit">save changes</button>
+=======
 {% load bootstrap3 %}
 
 {% block header %}
@@ -20,6 +33,7 @@
     {% buttons %}
     <button name="submit" class="btn btn-primary">save changes</button>
     {% endbuttons %}
+>>>>>>> c2ea98ca74aae0fd1aaffa7293a64ceaf8950239
   </form>
 
 {% endblock %}
