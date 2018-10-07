@@ -1,16 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
-=======
->>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
-=======
 from django.contrib.auth.decorators import login_required
->>>>>>> c2ea98ca74aae0fd1aaffa7293a64ceaf8950239
+
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
@@ -36,11 +32,7 @@ def topic(request, topic_id):
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learning_logs/topic.html', context)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
+
 
 @login_required
 def new_topic(request):
@@ -100,15 +92,9 @@ def edit_entry(request, entry_id):
 
     context = {'entry': entry, 'topic':topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 13173ebdbc6c552af733a2c88de4d9ef84f8d32c
-=======
->>>>>>> 9d27cb3f7b1815aaf61ef9792ea2d650f6cad432
-=======
+
 
 def check_topic_owner(request, topic):
     """현재 유저가 올바른 유저인지 체크한다"""
     if topic.owner != request.user:
         raise Http404
->>>>>>> c2ea98ca74aae0fd1aaffa7293a64ceaf8950239
