@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -135,6 +134,9 @@ BOOTSTRAP3 = {
 }
 
 #  Heroku settings
+import django_heroku
+# Activate Django-Heroku.
+django_heroku.settings(locals())
 cwd = os.getcwd()
 if cwd == '/app' or cwd[:4] == '/tmp':
     import dj_database_url
