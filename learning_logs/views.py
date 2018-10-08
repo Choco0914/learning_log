@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 
@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
- 
+
 def index(request):
     """학습 로그 홈페이지"""
     return render(request, 'learning_logs/index.html')
@@ -25,7 +25,7 @@ def topics(request):
 @login_required
 def topic(request, topic_id):
     """주제 하나와 연결된 모든 항목을 표시한다."""
-    topic = Topic.objects.get(id=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
     # 주제가 현재 사용자의 것인지 확인한다.
     check_user = check_topic_owner(request, topic)
 
