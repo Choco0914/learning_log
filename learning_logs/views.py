@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
-
+ 
 def index(request):
     """학습 로그 홈페이지"""
     return render(request, 'learning_logs/index.html')
