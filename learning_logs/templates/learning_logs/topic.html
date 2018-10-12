@@ -7,11 +7,12 @@
         <form action="{% url 'learning_logs:topics_remove' topic.id %}"
         method='post' class="form">
               {% csrf_token %}
-
-              {% buttons %}
-                <button name="submit"
-                class="btn btn-danger">Delete topic</button>
-              {% endbuttons %}
+              <div class="text-right">
+                {% buttons %}
+                  <button name="submit"
+                  class="btn btn-danger">Delete topic</button>
+                {% endbuttons %}
+              </div>
           </form>
       </small>
   </h1>
