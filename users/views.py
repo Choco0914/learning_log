@@ -23,7 +23,7 @@ def register(request):
             # 사용자를 로그인시키고 홈페이지로 리다이렉트한다.
             authenticated_user = authenticate(username=new_user.username,
                 password=request.POST['password1'])
-            login(request, quthenticated_user)
+            login(request, authenticated_user)
             return HttpResponseRedirect(reverse('learning_logs:index'))
 
     context = {'form': form}

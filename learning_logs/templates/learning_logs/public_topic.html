@@ -1,0 +1,37 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h1>{{ topic }}</h1>
+  <h3>author - {{ topic.owner }}</h3>
+{% endblock %}
+
+{% block content %}
+
+{% for entry in entries %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>
+      {{ entry.date_added|date:'M d, Y H:i' }}
+      <small>
+          <form action="{% url 'learning_logs:read_entry' entry.id %}"
+          method='post' class="form">
+                {% csrf_token %}
+
+                {% buttons %}
+                  <button name="submit"
+                  class="btn btn-success">Read More</button>
+                {% endbuttons %}
+            </form>
+      </small>
+    </h3>
+  </div>
+  <div class="panel-body">
+    {{ entry.text|truncatechars:150|linebreaks }}
+  </div>
+</div><!-- panel -->
+{% empty %}
+  There is nothing
+{% endfor %}
+
+{% endblock %}
