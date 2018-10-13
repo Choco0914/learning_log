@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 from .models import Topic, Entry
-from .forms import TopicForm, EntryForm
+from .forms import TopicForm, EntryForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -110,12 +110,34 @@ def edit_entry(request, entry_id):
         form = EntryForm(instance=entry)
     else:
         # POST 데이터를 받았으므로 받은 데이터를 처리한다.
-        form = EntryForm(instance=entry, data=request.POST)
+        form = EntryForm(data=request.POST)
         return HttpResponseRedirect(reverse('learning_logs:topic',
                                     args=[topic.id]))
 
     context = {'entry': entry, 'topic':topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
+
+@login_required
+def add_comment_to_topic(request, entry_id):
+    "댓글을 달수있게한다."
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+
+    if request.method != "POST":
+        form = CommentForm()
+    else:
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.topic = topic
+            new_comment.author = request.user
+            new_comment.save()
+            return HttpResponseRedirect(reverse('learning_logs:read_entry',
+                                        args=[entry_id]))
+
+    context = {'entry':entry, 'topic':topic, 'form':form,}
+    return render(request, 'learning_logs/add_comment_to_topic.html',
+            context)
 
 @login_required
 def topics_remove(request, topic_id):

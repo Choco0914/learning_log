@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Topic(models.Model):
     """topic은 사용자가 공부하고 있는 주제이다."""
@@ -28,3 +29,18 @@ class Entry(models.Model):
             return self.text[:50] + "..."
         else:
             return self.text[:]
+
+class Comment(models.Model):
+    topic = models.ForeignKey(Topic, related_name='comments',
+     on_delete = models.CASCADE)
+    author = models.ForeignKey(User, on_delete = models.CASCADE)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text

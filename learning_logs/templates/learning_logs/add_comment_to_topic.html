@@ -1,0 +1,21 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2><a href="{% url 'learning_logs:read_entry' entry.id %}">
+    <strong>{{ topic }}</strong></h2></a>
+{% endblock %}
+
+{% block content %}
+    <h1>New comment</h1>
+    <form action="{% url 'learning_logs:add_comment_to_topic' entry.id %}"
+     method="post" class="post-form">
+
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+        <button name="submit" class="btn btn-success">Send</button>
+        {% endbuttons %}
+    </form>
+{% endblock %}
