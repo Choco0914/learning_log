@@ -31,7 +31,7 @@ class Entry(models.Model):
             return self.text[:]
 
 class Comment(models.Model):
-    topic = models.ForeignKey(Topic, related_name='comments',
+    entry = models.ForeignKey(Entry, related_name='comments',
      on_delete = models.CASCADE)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
     text = models.TextField()

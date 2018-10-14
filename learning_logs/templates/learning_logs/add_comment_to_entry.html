@@ -8,7 +8,7 @@
 
 {% block content %}
     <h1>New comment</h1>
-    <form action="{% url 'learning_logs:add_comment_to_topic' entry.id %}"
+    <form action="{% url 'learning_logs:add_comment_to_entry' entry.id %}"
      method="post" class="post-form">
 
         {% csrf_token %}

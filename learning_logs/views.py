@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 
 
-from .models import Topic, Entry
+from .models import Topic, Entry, Comment
 from .forms import TopicForm, EntryForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -118,9 +118,9 @@ def edit_entry(request, entry_id):
     return render(request, 'learning_logs/edit_entry.html', context)
 
 @login_required
-def add_comment_to_topic(request, entry_id):
+def add_comment_to_entry(request, entry_id):
     "댓글을 달수있게한다."
-    entry = Entry.objects.get(id=entry_id)
+    entry = get_object_or_404(Entry, id=entry_id)
     topic = entry.topic
 
     if request.method != "POST":
@@ -129,14 +129,14 @@ def add_comment_to_topic(request, entry_id):
         form = CommentForm(data=request.POST)
         if form.is_valid():
             new_comment = form.save(commit=False)
-            new_comment.topic = topic
+            new_comment.entry = entry
             new_comment.author = request.user
             new_comment.save()
             return HttpResponseRedirect(reverse('learning_logs:read_entry',
                                         args=[entry_id]))
 
-    context = {'entry':entry, 'topic':topic, 'form':form,}
-    return render(request, 'learning_logs/add_comment_to_topic.html',
+    context = {'entry':entry, 'topic':topic, 'form':form, }
+    return render(request, 'learning_logs/add_comment_to_entry.html',
             context)
 
 @login_required
@@ -159,6 +159,20 @@ def entries_remove(request, entry_id):
     entry.delete()
     return HttpResponseRedirect(reverse('learning_logs:topic',
                                 args=[topic_id]))
+
+@login_required
+def comment_delete(request, comment_id):
+    """댓글을 삭제한다."""
+    comment = Comment.objects.get(id=comment_id)
+    entry = comment.entry
+    # 댓글의 유저를 확인한다.
+    if comment.author != request.user:
+        raise Http404
+
+    comment.delete()
+    return HttpResponseRedirect(reverse('learning_logs:read_entry',
+                                args=[entry.id]))
+
 
 def check_topic_owner(request, topic):
     """현재 유저가 올바른 유저인지 체크한다"""

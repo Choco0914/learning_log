@@ -16,7 +16,7 @@
       {{ entry.text|linebreaks }}
     </div>
   </div>
-  <form action="{% url 'learning_logs:add_comment_to_topic' entry.id %}"
+  <form action="{% url 'learning_logs:add_comment_to_entry' entry.id %}"
     class="form-inline">
     <button class="btn btn-success">
       Add Comment
@@ -34,7 +34,17 @@
     <div class="actionBox">
       <ul class="commentList">
         <li>
-          {% for comment in topic.comments.all %}
+          {% for comment in entry.comments.all %}
+          <form action="{% url 'learning_logs:comment_delete' comment.id %}"
+          method='post' class="form">
+                {% csrf_token %}
+                <div class="text-right">
+                  {% buttons %}
+                    <button name="submit"
+                    class="btn btn-danger">Delete Comment</button>
+                  {% endbuttons %}
+                </div>
+            </form>
               <div class="commentText">
                 <p class="">{{ comment.text|linebreaks }}</p>
                   <span class="date sub-text">{{ comment.created_date }}</span>

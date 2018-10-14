@@ -38,5 +38,9 @@ urlpatterns = [
 
      #댓글을 추가하는 페이지
      re_path(r'^read_entry/(?P<entry_id>\d+)/comment/$',
-      views.add_comment_to_topic, name= 'add_comment_to_topic'),
+      views.add_comment_to_entry, name= 'add_comment_to_entry'),
+
+     #댓글을 삭제하기
+     re_path(r'^entry/(?P<comment_id>\d+)/comment/$',
+     views.comment_delete, name ='comment_delete'),
 ]
